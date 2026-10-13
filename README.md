@@ -1,6 +1,6 @@
 # GitHub Workflow Auditor
 
-[![CI Quality & Compliance](https://github.com/nguyen0111/gh-workflow-auditor/actions/workflows/ci.yml/badge.svg)](https://github.com/nguyen0111/gh-workflow-auditor/actions/workflows/ci.yml)
+[![CI Quality & Compliance](https://github.com/nguyen0111/gh-workflow-auditor/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/nguyen0111/gh-workflow-auditor/actions/workflows/ci.yml)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
 A security and operational compliance auditor for GitHub Actions workflows. Designed for enterprise banking environments where CI/CD supply chain security, privilege control, and cost management are critical.
