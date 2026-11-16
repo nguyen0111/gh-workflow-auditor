@@ -20,8 +20,8 @@ This tool enforces a baseline security posture by detecting these issues before 
 
 | Rule ID | Severity | Description |
 |---------|----------|-------------|
-| **SEC001** | HIGH | Pin Third-Party Actions to 40-character commit SHA. Official GitHub Actions (`actions/*`) and local actions (`./`) are exempt. |
-| **SEC002** | CRITICAL | Enforce Explicit Least-Privilege Permissions. Flags missing top-level `permissions` or `write-all` configuration. |
+| **SEC001** | HIGH | Pin ALL Actions to immutable references. Every `uses:` entry — including official `actions/*` — must use a 40-character commit SHA. Only local actions (`./`) and `docker://` images pinned to a `@sha256:` digest are exempt. |
+| **SEC002** | CRITICAL | Enforce Explicit Least-Privilege Permissions. Flags missing top-level `permissions` and any `write-all` override at workflow or job level. |
 | **SEC003** | HIGH | Restrict Dangerous `pull_request_target` Triggers. Flags workflows that use this event, which can be dangerous with untrusted code. |
 | **OPS001** | MEDIUM | Enforce Explicit `timeout-minutes` on all Jobs. Flags jobs that lack timeout declarations to prevent runaway resource consumption. |
 
@@ -32,8 +32,7 @@ This tool enforces a baseline security posture by detecting these issues before 
 ┏━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━┓
 ┃ Severity ┃ Rule ID           ┃ Message           ┃ File               ┃ Line ┃
 ┡━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━┩
-│ HIGH     │ unpinned-action   │ Third-party       │ .github/workflows/… │ 11   │
-│          │                   │ action            │                    │      │
+│ HIGH     │ unpinned-action   │ Action            │ .github/workflows/… │ 11   │
 │          │                   │ 'docker/build-pu… │                    │      │
 │          │                   │ is not pinned to  │                    │      │
 │          │                   │ a 40-character    │                    │      │
@@ -113,8 +112,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.10"
       - run: pip install gh-workflow-auditor

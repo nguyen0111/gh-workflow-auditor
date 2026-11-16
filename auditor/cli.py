@@ -1,6 +1,5 @@
 """CLI entry point for gh-workflow-auditor."""
 
-import os
 from pathlib import Path
 
 import typer
